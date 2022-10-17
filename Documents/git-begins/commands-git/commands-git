@@ -1,0 +1,8 @@
+git clone < https://github.com/nom-prenom/git-begins.git >
+
+git add "begins git"
+git commit -m "begins git"
+
+git push < https://github.com/nom-prenom/git-begins.git >
+
+git push -u origin main < https://github.com/nom-prenom/git-begins.git >
