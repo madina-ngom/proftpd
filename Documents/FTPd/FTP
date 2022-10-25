@@ -1,0 +1,27 @@
+#!/bin/bash 
+
+#installer FTP
+sudo apt-get install proftpd
+#Mettre à jour les paquets
+sudo apt-get update
+#Acceder à mon ftp en mode anonyme
+nano /etc/proftpd/proftpd.conf
+#Ne pas oublier de modifier les paramètres
+#Décommenter la ligne /etc/proftpd/tls.conf
+
+#Créer un répertoire pour stocker le certificat et la clé
+mkdir /etc/proftpd/ssl
+#La commande pour générer le certificat et la clé auto signé
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:4096 -out proftpd-rsa.pem -keyout proftpd-key.pem
+#Sécuriser le certificat SSL et TLS
+sudo chmod 440 proftpd-key.pem
+#Modifier les droits de certificat et la clé afin de les définir en lecture 
+chmod 744 /etc/proftpd/ssl/proftpd.key
+chmod 744 /etc/proftpd/ssl/proftpd.crt
+
+#Editer la module de tls.conf
+nano /etc/proftpd/tls.conf
+#Ne pas oublier de décommenter les deux lignes
+
+#Mettre en marche le serveur
+sudo systemctl start proftp
